@@ -10,14 +10,30 @@ function AboutController($scope) {
 	
 }
 
-function PostListController($scope, Post) {
-    var self = this;
-    self.posts = [];
-    var postsQuery = Post.get({postId: ''});
-    postsQuery.$promise.then(function (result) {
-		angular.forEach(result['data'], function(post, akey) {
-			this.push({id: post['id'], title: post['attributes']['title']});
-		}, self.posts);
-		$scope.posts = self.posts;
+
+function EmployeeController($scope, Employee){
+	self.employees = [];
+	var query = Employee.get({employee_id: ''});
+    query.$promise.then(function (result) {
+		angular.forEach(result['data'], function(d, akey) {
+			this.push({id: d['id'], name: d['name']});
+		}, self.employees);
+		$scope.employees = self.employees;
     });
+
 }
+
+function TeamController($scope, Team){
+	self.teams = [];
+	var query = Team.get({team_id: ''});
+    query.$promise.then(function (result) {
+		angular.forEach(result['data'], function(d, akey) {
+			this.push({id: d['id'], name: d['name']});
+		}, self.teams);
+		$scope.teams = self.teams;
+    });
+
+}
+
+app.controller("EmployeeController", EmployeeController);
+app.controller("TeamController", TeamController);
